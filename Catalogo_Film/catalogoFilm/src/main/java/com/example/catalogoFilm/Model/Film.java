@@ -1,24 +1,25 @@
-package com.example.catalogoFilm;
+package com.example.catalogoFilm.Model;
 
 public class Film {
-     private int id;
+    //inserisco un ID autoincrementale e lo tolgo dal costruttore
+
+    private Long id;
     private String titolo;
     private String regista;
     private int anno;
     private String genere;
 
-    public Film (int id, String titolo, String regista, int anno, String genere){
-        this.id = id;
+    public Film (String titolo, String regista, int anno, String genere){
         this.titolo = titolo;
         this.regista = regista;
         this.anno= anno;
         this.genere= genere;
     }
     
-    public int getId(){
+    public Long getId(){
         return id;
     }    
-    public void setId(int nuovoId){
+    public void setId(Long nuovoId){
         this.id= nuovoId;
     }
 
