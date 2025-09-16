@@ -1,5 +1,6 @@
 package com.example.catalogoFilm.Web;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -23,4 +24,14 @@ public class CatalogoFilmController {
     public  List<Film> visualizzaFilm(){
         return service.filmpresenti();        
     }
+
+    @PostMapping
+    public ResponseEntity<Film> creaFilm(@RequestBody Film body){
+        Film nuovoFilm = service.aggiungiFilm(body);
+        return ResponseEntity.created(URI.create("/Film"+nuovoFilm.getId()))
+                             .body(nuovoFilm);
+    }
+
+
+
 }
