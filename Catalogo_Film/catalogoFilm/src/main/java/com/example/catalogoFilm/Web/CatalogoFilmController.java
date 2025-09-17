@@ -35,6 +35,14 @@ public List<Film> visualizzaFilm(@RequestParam(required = false) String titolo) 
                              .body(nuovoFilm);
     }
 
+// Metodo Put
+    @PutMapping("/{id}")
+    public ResponseEntity<Film> aggiornaFilm(@PathVariable Long id, @RequestBody Film body) {
+        Film filmAggiornato= service.aggiorna(id, body);
+        return ResponseEntity.ok().body(filmAggiornato);
+        
+    }
+
 //delete
 @DeleteMapping("/{id}")
 public ResponseEntity<Void> eliminaFilm(@PathVariable Long id) {
