@@ -20,17 +20,28 @@ public class CatalogoFilmController {
     }   
 
     //Get lista di tutti  i film
-    @GetMapping
-    public  List<Film> visualizzaFilm(){
-        return service.filmpresenti();        
+@GetMapping
+public List<Film> visualizzaFilm(@RequestParam(required = false) String titolo) {
+    if (titolo != null && !titolo.isEmpty()) {
+        return service.ricercaFilm(titolo);
     }
-
+    return service.filmpresenti();
+}
+//crea film
     @PostMapping
     public ResponseEntity<Film> creaFilm(@RequestBody Film body){
         Film nuovoFilm = service.aggiungiFilm(body);
         return ResponseEntity.created(URI.create("/Film"+nuovoFilm.getId()))
                              .body(nuovoFilm);
     }
+
+//delete
+@DeleteMapping("/{id}")
+public ResponseEntity<Void> eliminaFilm(@PathVariable Long id) {
+    service.eliminaFilm(id);
+    return ResponseEntity.ok().build();
+}
+
 
 
 

@@ -2,6 +2,7 @@ package com.example.catalogoFilm.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -27,4 +28,18 @@ public class CatalogoFilm{
         catalogoFilm.add(nuovoFilm);
         return nuovoFilm;
         } 
+           //ricerca con filtro
+    public List<Film> ricercaFilm(String titolo){
+    List<Film> risultati = new ArrayList<>();
+        risultati = catalogoFilm.stream()
+                    .filter(film -> film.getTitolo().equalsIgnoreCase(titolo))
+                    .collect(Collectors.toList());//colleziona i risultati nella lista filtrata
+            return risultati;
+
+    }
+
+    //eliminazione film
+    public void eliminaFilm(Long id){
+        catalogoFilm.removeIf(film -> film.getId().equals(id)); 
+    }
 }
