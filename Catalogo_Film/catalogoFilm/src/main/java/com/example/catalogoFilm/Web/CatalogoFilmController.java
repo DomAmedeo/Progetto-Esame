@@ -43,6 +43,17 @@ public List<Film> visualizzaFilm(@RequestParam(required = false) String titolo) 
         
     }
 
+//ricerca con filtro
+@GetMapping("/ricerca/{titolo}")
+public ResponseEntity<List<Film>> ricercaFilm(@PathVariable String titolo) {
+    List<Film> risultati = service.ricercaFilm(titolo);
+    if (risultati.isEmpty()) {
+        return ResponseEntity.noContent().build();
+    }
+    return ResponseEntity.ok(risultati);
+}
+
+
 //delete
 @DeleteMapping("/{id}")
 public ResponseEntity<Void> eliminaFilm(@PathVariable Long id) {
