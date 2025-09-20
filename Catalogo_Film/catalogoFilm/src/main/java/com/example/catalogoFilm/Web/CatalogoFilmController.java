@@ -20,7 +20,7 @@ public class CatalogoFilmController {
     }   
 
     //Get lista di tutti  i film
-@GetMapping
+@GetMapping("/Visualizza")
 public List<Film> visualizzaFilm(@RequestParam(required = false) String titolo) {
     if (titolo != null && !titolo.isEmpty()) {
         return service.ricercaFilm(titolo);
@@ -28,7 +28,7 @@ public List<Film> visualizzaFilm(@RequestParam(required = false) String titolo) 
     return service.filmpresenti();
 }
 //crea film
-    @PostMapping
+    @PostMapping("/Crea")
     public ResponseEntity<Film> creaFilm(@RequestBody Film body){
         Film nuovoFilm = service.aggiungiFilm(body);
         return ResponseEntity.created(URI.create("/Film"+nuovoFilm.getId()))
